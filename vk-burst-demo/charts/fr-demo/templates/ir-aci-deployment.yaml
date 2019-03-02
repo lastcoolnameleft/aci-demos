@@ -41,7 +41,13 @@ spec:
       - name: pic-volume
         emptyDir: {}
       dnsPolicy: ClusterFirst
-      nodeName: virtual-kubelet-myaciconnector-linux 
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+        kubernetes.io/role: agent
+        type: virtual-kubelet
       tolerations:
-      - key: azure.com/aci
+      - key: virtual-kubelet.io/provider
+        operator: Equal
+        value: azure
         effect: NoSchedule
+
